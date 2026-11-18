@@ -1,168 +1,221 @@
-# 🎵 Music Recommender Simulation
+# VibeMatch AI 🎵
+### An Explainable and Reliable Music Recommendation System
 
-## Project Summary
+## Project Overview
 
-In this project you will build and explain a small music recommender system.
+VibeMatch AI is a personalized music recommendation system
+that helps users discover songs based on their preferences.
 
-Your goal is to:
+The application recommends music based on genre, mood,
+energy, and valence (musical positivity).
 
-- Represent songs and a user "taste profile" as data
-- Design a scoring rule that turns that data into recommendations
-- Evaluate what your system gets right and wrong
-- Reflect on how this mirrors real world AI recommenders
+Unlike a basic recommendation system, VibeMatch AI also
+verifies its recommendations, explains its scoring decisions,
+and allows users to improve their playlist through feedback.
 
-Replace this paragraph with your own summary of what your version does.
+This project extends my original CodePath AI110 Module 3
+Music Recommender Simulation.
 
----
+## Features
 
+- Personalized music recommendations
+- Genre and mood matching
+- Energy and valence similarity scoring
+- Explainable recommendation scores
+- Feedback-based playlist updates
+- Input validation and safety guardrails
+- Automatic recommendation verification
+- Logging and error handling
+- Automated reliability testing
 
-## How The System Works
+## How It Works
 
-My music recommendation system uses content-based filtering to suggest songs based on a user's music preferences. Real platforms like Spotify and YouTube use information such as listening history, likes, skips, and song characteristics to recommend content. My version is simpler and focuses on matching songs to a user's preferred genre, mood, energy, and valence.
+1. The user enters their music preferences.
+2. The system validates the inputs.
+3. Songs are loaded and checked for invalid data.
+4. Relevant songs are retrieved from the dataset.
+5. The recommendation engine calculates match scores.
+6. Songs are ranked by compatibility.
+7. Recommendations are verified before being displayed.
+8. The user can dislike songs and receive an updated playlist.
 
-### Song Features
+## Recommendation Algorithm
 
-Each Song object contains an ID, title, artist, genre, mood, energy, tempo, valence, danceability, and acousticness. I started with 10 songs and added 8 more from different genres and moods to make the dataset more diverse.
+The system uses a specialized, rule-based recommendation
+algorithm to evaluate how closely each song matches
+the user's preferences.
 
-### User Profile
+The scoring system considers:
 
-For my example user, I chose these preferences:
+- Genre match: up to 4 points
+- Mood match: up to 3 points
+- Energy similarity: up to 2 points
+- Valence similarity: up to 1 point
 
-- Favorite genre: lofi
-- Favorite mood: chill
-- Target energy: 0.40
-- Target valence: 0.60
+Each recommendation receives a score between 0 and 10.
 
-I chose these preferences because I wanted the recommender to recognize the difference between relaxing music and more intense songs. Using both categorical and numerical features should help make the recommendations more specific.
+The application also provides an explanation describing
+how the score was calculated.
 
-### Algorithm Recipe
+This is a deterministic recommendation system, not a
+generative language model.
 
-My system will compare each song with the user's preferences and give it a score out of 10 points.
+## Advanced AI Feature: Reliability Testing
 
-- **Genre match:** 4 points if the genre matches the user's favorite genre.
-- **Mood match:** 3 points if the mood matches the user's preferred mood.
-- **Energy similarity:** Up to 2 points depending on how close the song's energy is to the user's target.
-- **Valence similarity:** Up to 1 point depending on how close the song's valence is to the user's target.
+VibeMatch AI integrates reliability checks directly
+into the recommendation workflow.
 
-For energy, the formula is `2 * (1 - abs(song_energy - target_energy))`.
+The system checks that:
 
-For valence, the formula is `1 - abs(song_valence - target_valence)`.
+- User preferences are valid.
+- Energy and valence values fall between 0 and 1.
+- Song data contains required information.
+- Duplicate song IDs are excluded.
+- Recommendation scores are valid.
+- Explanations match the scoring calculations.
+- Disliked songs are excluded from updated results.
 
-I decided to give genre and mood the highest weights because I think they have a bigger impact on the type of music someone wants to hear. Energy and valence help make the results more accurate by considering how a song feels.
+The system uses Python logging to record processing
+information and warnings.
 
-### Recommendation Process
+## Technologies Used
 
-The system will first read the user's preferences and load all the songs from the CSV file. It will then go through each song, compare its features with the user's preferences, and calculate a total score.
+- Python
+- pytest
+- CSV datasets
+- Git and GitHub
+- Mermaid architecture diagrams
 
-After every song has been scored, the system will sort the songs from highest to lowest and return the top three recommendations. Each recommendation will also include an explanation of why it matches the user's taste.
+## Installation
 
-**Input → Compare Features → Calculate Scores → Rank Songs → Top 3 Recommendations**
+Clone this repository:
 
-### Potential Biases and Limitations
+    git clone https://github.com/aditrit06/applied-ai-system-final.git
 
-One possible issue with my system is that it gives more importance to genre, which means it might overlook songs from other genres that still match the user's preferred mood and energy. For example, someone who likes chill lofi music might also enjoy relaxing jazz, but the system could rank jazz lower just because the genre is different.
+Navigate into the project:
 
-Another limitation is that my dataset only contains 18 songs, so the recommendations will be limited. The system also doesn't consider lyrics, listening history, or how a person's music taste might change over time. I think adding more songs and considering user feedback would make the recommender better in the future.
+    cd applied-ai-system-final
 
----
+Create a virtual environment:
 
-## Getting Started
+    python3 -m venv .venv
 
-### Setup
+Activate it on macOS or Linux:
 
-1. Create a virtual environment (optional but recommended):
+    source .venv/bin/activate
 
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate      # Mac or Linux
-   .venv\Scripts\activate         # Windows
+Install dependencies:
 
-2. Install dependencies
+    python -m pip install -r requirements.txt
 
-```bash
-pip install -r requirements.txt
-```
+Install pytest if needed:
 
-3. Run the app:
+    python -m pip install pytest
 
-```bash
-python -m src.main
-```
+## Running the Application
 
-### Running Tests
+Run:
 
-Run the starter tests with:
+    python -m src.main
 
-```bash
-pytest
-```
+Example input:
 
-You can add more tests in `tests/test_recommender.py`.
+    Genre: pop
+    Mood: chill
+    Energy: 1.0
+    Valence: 0.6
 
----
+The system returns ranked song recommendations
+with scores and explanations.
 
-## Sample Recommendation Output
+Users can enter disliked song IDs to generate
+an updated playlist.
 
+## Testing
 
-```text
-Loaded songs: 18
-User profile: pop / happy / energy 0.80 / valence 0.80
+Run the automated test suite:
 
-Top 5 recommendations:
+    python -m pytest -q
 
-1. Sunrise City by Neon Echo - Score: 9.92/10
-   Because: genre match (+4.00); mood match (+3.00); energy similarity (+1.96); valence similarity (+0.96)
+Latest local test result:
 
-2. Gym Hero by Max Pulse - Score: 6.71/10
-   Because: genre match (+4.00); mood differs (+0.00); energy similarity (+1.74); valence similarity (+0.97)
+    15 passed
 
-3. Rooftop Lights by Indigo Parade - Score: 5.91/10
-   Because: genre differs (+0.00); mood match (+3.00); energy similarity (+1.92); valence similarity (+0.99)
+The tests evaluate recommendation functionality,
+validation, score ranges, duplicate prevention,
+feedback handling, consistency, and ranking.
 
-4. Concrete Dreams by Metro Verse - Score: 2.88/10
-   Because: genre differs (+0.00); mood differs (+0.00); energy similarity (+1.98); valence similarity (+0.90)
+See EVALUATION.md for detailed evaluation results.
 
-5. Midnight Salsa by Luna Sol - Score: 2.84/10
-   Because: genre differs (+0.00); mood differs (+0.00); energy similarity (+1.92); valence similarity (+0.92)
-```
+## System Architecture
 
+The system follows this workflow:
 
----
+User Input
+    |
+Input Validation
+    |
+Song Retrieval
+    |
+Recommendation Engine
+    |
+Ranking and Scoring
+    |
+Result Verification
+    |
+Personalized Playlist
+    |
+User Feedback
+    |
+Updated Recommendations
 
-## Experiments You Tried
+The Mermaid source file is located at:
 
-Use this section to document the experiments you ran. For example:
+    diagrams/architecture.mmd
 
-- What happened when you changed the weight on genre from 2.0 to 0.5
-- What happened when you added tempo or valence to the score
-- How did your system behave for different types of users
+## Responsible AI Design
 
----
+VibeMatch AI focuses on transparency and reliability.
 
-## Limitations and Risks
+Recommendations include explanations so users can
+understand why particular songs were selected.
 
-Summarize some limitations of your recommender.
+Input validation and verification help prevent
+incorrect or inconsistent outputs.
 
-Examples:
+The application does not claim to understand users'
+emotions or guarantee musical satisfaction.
 
-- It only works on a tiny catalog
-- It does not understand lyrics or language
-- It might over favor one genre or mood
+## Limitations
 
-You will go deeper on this in your model card.
+- The current dataset includes 18 songs.
+- The recommendation algorithm is rule-based.
+- Recommendations depend on available song metadata.
+- Feedback is not permanently stored.
+- The application does not use a generative AI model.
+- Recommendation quality has not been evaluated
+  through a large-scale user study.
 
----
+## Future Improvements
 
-## Reflection
+- Expand the song dataset
+- Add Spotify API integration
+- Support natural-language preferences
+- Build an interactive web interface
+- Save user preferences
+- Improve personalization using machine learning
 
-Read and complete `model_card.md`:
+## Conclusion
 
-[**Model Card**](model_card.md)
+VibeMatch AI demonstrates how a simple recommendation
+prototype can be extended into a more reliable,
+explainable, and interactive applied AI system.
 
-Write 1 to 2 paragraphs here about what you learned:
+The project integrates retrieval, recommendation logic,
+guardrails, verification, logging, and reliability
+testing into one functional application.
 
-- about how recommenders turn data into predictions
-- about where bias or unfairness could show up in systems like this
+## Author
 
-
-
+Aditri Tangeti
+CodePath AI110 — Applied AI System Final Project

@@ -1,0 +1,21 @@
+flowchart TD
+    A["User enters music preferences"] --> B["Input Validation and Guardrails"]
+
+    B -->|Invalid Input| C["Display Safe Error Message"]
+    B -->|Valid Input| D["Load Song Dataset"]
+
+    D --> E["Clean and Validate Song Data"]
+    E --> F["Retrieve Matching Songs"]
+    F --> G["AI Recommendation Engine"]
+
+    G --> H["Score Songs by Genre, Mood, Energy, and Valence"]
+    H --> I["Rank Recommendations"]
+    I --> J["Verify Scores and Explanations"]
+
+    J -->|Invalid Result| K["Log Warning and Skip"]
+    J -->|Verified| L["Display Personalized Playlist"]
+
+    L --> M{"User Dislikes a Song?"}
+    M -->|Yes| N["Exclude Disliked Song"]
+    N --> F
+    M -->|No| O["Finish Session"]
