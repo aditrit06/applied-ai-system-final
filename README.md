@@ -372,3 +372,19 @@ Error: energy must be between 0 and 1
 
 Full test evidence is in [assets/EXECUTION_LOG.md](assets/EXECUTION_LOG.md).
 <!-- DEMO EVIDENCE END -->
+
+## Original Project Attribution
+
+This project extends the CodePath AI110 Module 3
+Music Recommender Simulation starter project.
+
+Original repository:
+https://github.com/aditrit06/ai110-module3show-musicrecommendersimulation-starter
+
+The original recommender and dataset provided the foundation
+for VibeMatch AI. The final project adds an integrated
+recommendation workflow, guardrails, verification, feedback,
+automated tests, and documentation.
+
+The starter project's original contributors are credited
+through the linked source repository.
