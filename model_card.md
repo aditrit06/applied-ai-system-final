@@ -52,3 +52,67 @@ Future work could include a larger dataset, persistent preferences, natural-lang
 
 ## Responsible Design
 VibeMatch AI prioritizes understandable explanations, input validation, transparent limitations, and user control.
+
+## Reflection: AI Collaboration
+
+I used ChatGPT to help me extend my original Module 3
+music recommender into a complete applied AI system.
+
+ChatGPT helped me organize my Python modules, develop
+guardrails, create reliability tests, and improve my
+documentation.
+
+I copied the suggested code into VS Code and tested it
+myself. When the initial terminal paste failed, I had
+to troubleshoot the issue and create the files separately.
+
+I also manually tested the recommendation system and
+confirmed that disliking a song changed the playlist.
+
+AI was useful for speeding up development, but I still
+needed to run the code, review the results, and verify
+that the application behaved as expected.
+
+## Reflection: Bias and Responsible AI
+
+My system has some limitations related to dataset bias.
+
+Because I only have 18 songs, certain genres and moods
+may be represented more than others. The scoring system
+also assigns more weight to genre and mood matching,
+which may not reflect every user's preferences.
+
+I tried to make the system more transparent by including
+explanations for each recommendation.
+
+The application also validates inputs and verifies
+recommendations before displaying them.
+
+## Reflection: Testing and Results
+
+I used pytest to evaluate recommendation behavior,
+input validation, score accuracy, duplicate prevention,
+feedback handling, and consistency.
+
+My earlier local evaluation passed 15 tests.
+
+I also manually entered different preferences and
+confirmed that the application generated recommendations
+and updated them when I disliked a song.
+
+These tests help establish reliability for the tested
+scenarios. However, they do not prove that users will
+always enjoy the recommended songs.
+
+## Reflection: What I Learned
+
+This project taught me that building a useful AI-related
+application involves more than generating an answer.
+
+I learned how important it is to validate information,
+explain system decisions, test edge cases, and involve
+users in the process.
+
+If I continued improving this project, I would focus
+on expanding the dataset and developing more advanced
+personalization features.
